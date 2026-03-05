@@ -812,149 +812,392 @@ const css = `
   /* ── BIG WIN OVERLAY ── */
   .bigwin-overlay {
     position: fixed; inset: 0; z-index: 9999;
-    background: rgba(0,0,0,0.85);
-    display: flex; align-items: center; justify-content: center;
-    animation: bwFadeIn 0.3s ease-out;
-    cursor: pointer;
-  }
-  @keyframes bwFadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  .bigwin-card {
-    background: var(--felt);
-    border: 3px solid var(--neon-amber);
-    box-shadow: 0 0 60px rgba(255,183,0,0.5), 0 0 120px rgba(255,183,0,0.2), inset 0 0 40px rgba(255,183,0,0.05);
-    padding: 40px 60px;
-    text-align: center;
-    position: relative;
+    background: rgba(0,0,0,0.88);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    animation: bwFadeIn 0.25s ease-out;
     overflow: hidden;
-    max-width: 560px;
-    width: 90%;
-    animation: bwPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  @keyframes bwPop {
-    from { transform: scale(0.5) rotate(-3deg); opacity: 0; }
-    to   { transform: scale(1) rotate(0deg); opacity: 1; }
-  }
-  .bigwin-card::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,183,0,0.02) 10px, rgba(255,183,0,0.02) 11px);
+  @keyframes bwFadeIn { from { opacity:0 } to { opacity:1 } }
+
+  /* Flying money */
+  .money-piece {
+    position: fixed;
+    font-size: 2.2rem;
     pointer-events: none;
+    z-index: 10000;
+    left: var(--x);
+    top: -80px;
+    animation: moneyFall var(--dur) var(--ease) var(--delay) forwards;
+  }
+  @keyframes moneyFall {
+    0%   { transform: translateY(0)     rotate(0deg)         scale(1);   opacity:1; }
+    70%  { opacity: 1; }
+    100% { transform: translateY(115vh) rotate(var(--spin))  scale(0.7); opacity:0; }
   }
 
+  /* Text block */
+  .bigwin-text {
+    text-align: center;
+    z-index: 10001;
+    position: relative;
+    margin-bottom: 12px;
+  }
   .bigwin-label {
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 6px;
     color: var(--neon-amber);
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(255,183,0,0.8);
-    margin-bottom: 8px;
-    animation: flicker 0.15s ease-in-out infinite alternate;
+    animation: flicker 0.12s ease-in-out infinite alternate;
+    margin-bottom: 6px;
   }
   @keyframes flicker {
-    from { opacity: 0.85; text-shadow: 0 0 10px rgba(255,183,0,0.6); }
-    to   { opacity: 1;    text-shadow: 0 0 20px rgba(255,183,0,1), 0 0 40px rgba(255,183,0,0.5); }
+    from { opacity:0.8; text-shadow: 0 0 8px rgba(255,183,0,0.5); }
+    to   { opacity:1;   text-shadow: 0 0 20px rgba(255,183,0,1), 0 0 40px rgba(255,183,0,0.5); }
   }
-
   .bigwin-title {
     font-family: var(--font-display);
-    font-size: 4.5rem;
-    font-weight: 700;
-    letter-spacing: 6px;
+    font-size: 5rem; font-weight: 700;
+    letter-spacing: 6px; text-transform: uppercase; line-height: 1;
     color: var(--neon-amber);
-    text-transform: uppercase;
-    line-height: 1;
-    text-shadow: 0 0 20px rgba(255,183,0,0.9), 0 0 60px rgba(255,183,0,0.4);
-    margin-bottom: 16px;
-    animation: bigwinPulse 0.6s ease-in-out infinite alternate;
+    text-shadow: 0 0 24px rgba(255,183,0,0.9), 0 0 60px rgba(255,183,0,0.4);
+    animation: bigPulse 0.5s ease-in-out infinite alternate;
   }
-  @keyframes bigwinPulse {
+  @keyframes bigPulse {
     from { transform: scale(1);    text-shadow: 0 0 20px rgba(255,183,0,0.7); }
-    to   { transform: scale(1.04); text-shadow: 0 0 40px rgba(255,183,0,1), 0 0 80px rgba(255,183,0,0.5); }
+    to   { transform: scale(1.05); text-shadow: 0 0 40px rgba(255,183,0,1), 0 0 80px rgba(255,183,0,0.5); }
   }
-
   .bigwin-winner {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 4px;
+    font-family: var(--font-display); font-size: 2.2rem; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase;
     color: var(--neon-green);
-    text-transform: uppercase;
-    text-shadow: 0 0 16px rgba(57,255,106,0.8);
-    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(57,255,106,0.9);
+    margin-top: 8px;
   }
   .bigwin-amount {
-    font-family: var(--font-mono);
-    font-size: 3.2rem;
+    font-family: var(--font-mono); font-size: 3rem; letter-spacing: 4px;
     color: var(--neon-green);
-    letter-spacing: 4px;
     text-shadow: 0 0 20px rgba(57,255,106,0.9), 0 0 50px rgba(57,255,106,0.4);
-    margin-bottom: 6px;
   }
   .bigwin-lotname {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+    margin-top: 4px;
   }
   .bigwin-dismiss {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    animation: blink 1s step-end infinite;
+    font-family: var(--font-mono); font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 3px; text-transform: uppercase;
+    margin-top: 16px; z-index: 10001; position: relative;
+    animation: blink 1s step-end infinite; cursor: pointer;
   }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-  /* Flying money */
-  .money-piece {
-    position: fixed;
-    font-size: 2rem;
-    pointer-events: none;
-    z-index: 10000;
-    animation: moneyFly var(--dur) ease-in forwards;
-    left: var(--x);
-    top: -60px;
+  /* ── ARCADE GIRL ── */
+  .arcade-girl-wrap {
+    position: relative; z-index: 10001;
+    width: 160px; height: 260px;
+    margin: 0 auto 4px;
+    image-rendering: pixelated;
+    animation: girlBounce 0.45s ease-in-out infinite alternate;
+    cursor: pointer;
   }
-  @keyframes moneyFly {
-    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-    60%  { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(var(--spin)) scale(0.8); opacity: 0; }
+  @keyframes girlBounce {
+    from { transform: translateY(0) scaleX(1); }
+    to   { transform: translateY(-14px) scaleX(1.04); }
+  }
+
+  /* Hair */
+  .g-hair {
+    position: absolute; left: 44px; top: 0;
+    width: 72px; height: 38px;
+    background: #f5c842;
+    border-radius: 50% 50% 10% 10%;
+    box-shadow: inset 0 -6px 0 rgba(180,130,0,0.3);
+  }
+  .g-hair::before {
+    content:''; position:absolute;
+    left: -14px; top: 10px;
+    width: 18px; height: 50px;
+    background: #f5c842;
+    border-radius: 30% 0 60% 30%;
+  }
+  .g-hair::after {
+    content:''; position:absolute;
+    right: -14px; top: 10px;
+    width: 18px; height: 50px;
+    background: #f5c842;
+    border-radius: 0 30% 30% 60%;
+  }
+  /* Ponytail */
+  .g-ponytail {
+    position: absolute; right: 22px; top: 22px;
+    width: 14px; height: 40px;
+    background: #f5c842;
+    border-radius: 0 0 50% 50%;
+    transform-origin: top center;
+    animation: ponytailSwing 0.45s ease-in-out infinite alternate;
+  }
+  @keyframes ponytailSwing {
+    from { transform: rotate(-18deg); }
+    to   { transform: rotate(18deg); }
+  }
+  /* Face */
+  .g-face {
+    position: absolute; left: 50px; top: 20px;
+    width: 60px; height: 54px;
+    background: #f9dbb0;
+    border-radius: 40% 40% 48% 48%;
+  }
+  .g-eye-l, .g-eye-r {
+    position: absolute; top: 16px;
+    width: 8px; height: 9px;
+    background: #222;
+    border-radius: 50%;
+  }
+  .g-eye-l { left: 10px; }
+  .g-eye-r { right: 10px; }
+  .g-eye-l::after, .g-eye-r::after {
+    content:''; position:absolute;
+    top:1px; left:2px;
+    width:3px; height:3px;
+    background:#fff; border-radius:50%;
+  }
+  /* Blink */
+  .g-eye-l, .g-eye-r { animation: eyeBlink 2.8s ease-in-out infinite; }
+  @keyframes eyeBlink {
+    0%,44%,48%,100% { transform: scaleY(1); }
+    46% { transform: scaleY(0.08); }
+  }
+  .g-mouth {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 10px;
+    border-bottom: 3px solid #c0605a;
+    border-radius: 0 0 50% 50%;
+  }
+  .g-blush-l, .g-blush-r {
+    position: absolute; bottom: 16px;
+    width: 12px; height: 7px;
+    background: rgba(255,140,130,0.45);
+    border-radius: 50%;
+  }
+  .g-blush-l { left: 4px; }
+  .g-blush-r { right: 4px; }
+  /* Body / outfit */
+  .g-body {
+    position: absolute; left: 42px; top: 70px;
+    width: 76px; height: 72px;
+    background: #e03c6e;
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset 0 -8px 0 rgba(0,0,0,0.15);
+  }
+  /* Neckline */
+  .g-body::before {
+    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:24px; height:18px;
+    background: #f9dbb0;
+    border-radius: 0 0 50% 50%;
+  }
+  /* Skirt */
+  .g-skirt {
+    position: absolute; left: 34px; top: 136px;
+    width: 92px; height: 54px;
+    background: #e03c6e;
+    border-radius: 0 0 40% 40%;
+    box-shadow: inset 0 -6px 0 rgba(0,0,0,0.12);
+  }
+  /* Arms */
+  .g-arm-l {
+    position: absolute; left: 18px; top: 74px;
+    width: 28px; height: 14px;
+    background: #f9dbb0;
+    border-radius: 10px;
+    transform-origin: right center;
+    animation: armWaveL 0.45s ease-in-out infinite alternate;
+  }
+  @keyframes armWaveL {
+    from { transform: rotate(-40deg); }
+    to   { transform: rotate(-70deg); }
+  }
+  .g-arm-r {
+    position: absolute; right: 18px; top: 74px;
+    width: 28px; height: 14px;
+    background: #f9dbb0;
+    border-radius: 10px;
+    transform-origin: left center;
+    animation: armWaveR 0.45s ease-in-out infinite alternate;
+  }
+  @keyframes armWaveR {
+    from { transform: rotate(40deg); }
+    to   { transform: rotate(70deg); }
+  }
+  /* Hands */
+  .g-hand-l {
+    position:absolute; left: 6px; top: 66px;
+    width: 16px; height: 16px;
+    background: #f9dbb0; border-radius:50%;
+    animation: handWaveL 0.45s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+  }
+  @keyframes handWaveL {
+    from { transform: translate(-24px, -28px) rotate(-10deg); }
+    to   { transform: translate(-34px, -46px) rotate(10deg); }
+  }
+  .g-hand-r {
+    position:absolute; right: 6px; top: 66px;
+    width: 16px; height: 16px;
+    background: #f9dbb0; border-radius:50%;
+    animation: handWaveR 0.45s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+  }
+  @keyframes handWaveR {
+    from { transform: translate(24px, -28px) rotate(10deg); }
+    to   { transform: translate(34px, -46px) rotate(-10deg); }
+  }
+  /* Legs */
+  .g-leg-l {
+    position: absolute; left: 52px; top: 186px;
+    width: 24px; height: 50px;
+    background: #f9dbb0; border-radius: 4px;
+    transform-origin: top center;
+    animation: legKickL 0.45s ease-in-out infinite alternate;
+  }
+  @keyframes legKickL {
+    from { transform: rotate(-8deg); }
+    to   { transform: rotate(8deg); }
+  }
+  .g-leg-r {
+    position: absolute; right: 52px; top: 186px;
+    width: 24px; height: 50px;
+    background: #f9dbb0; border-radius: 4px;
+    transform-origin: top center;
+    animation: legKickR 0.45s ease-in-out infinite alternate;
+  }
+  @keyframes legKickR {
+    from { transform: rotate(8deg); }
+    to   { transform: rotate(-8deg); }
+  }
+  /* Shoes */
+  .g-shoe-l {
+    position: absolute; left: 44px; top: 230px;
+    width: 30px; height: 14px;
+    background: #222; border-radius: 4px 10px 10px 4px;
+    animation: legKickL 0.45s ease-in-out infinite alternate;
+    transform-origin: top center;
+  }
+  .g-shoe-r {
+    position: absolute; right: 44px; top: 230px;
+    width: 30px; height: 14px;
+    background: #222; border-radius: 10px 4px 4px 10px;
+    animation: legKickR 0.45s ease-in-out infinite alternate;
+    transform-origin: top center;
+  }
+  /* Sparkles around girl */
+  .g-sparkle {
+    position: absolute;
+    font-size: 1.4rem;
+    animation: sparkleSpin var(--sd) linear infinite;
+    opacity: 0.9;
+  }
+  @keyframes sparkleSpin {
+    0%   { transform: rotate(0deg)   scale(1);   opacity:0.6; }
+    50%  { transform: rotate(180deg) scale(1.3); opacity:1; }
+    100% { transform: rotate(360deg) scale(1);   opacity:0.6; }
   }
 `;
 
 // ── Big Win Overlay ────────────────────────────────────────────────────────
 function BigWinOverlay({ data, onDismiss }) {
-  const moneyEmojis = ["💵","💴","💶","💷","💰","🤑","💸"];
-  const pieces = Array.from({ length: 30 }, (_, i) => ({
+  const [visible, setVisible] = useState(true);
+
+  // Auto-dismiss after 5 seconds
+  useEffect(() => {
+    const t = setTimeout(() => { setVisible(false); setTimeout(onDismiss, 300); }, 5000);
+    return () => clearTimeout(t);
+  }, [onDismiss]);
+
+  const moneyEmojis = ["💵","💵","💴","💶","💸","💰","🤑","💵","💸","💵"];
+  const pieces = Array.from({ length: 35 }, (_, i) => ({
     id: i,
     emoji: moneyEmojis[i % moneyEmojis.length],
-    x: `${Math.random() * 100}vw`,
-    dur: `${1.2 + Math.random() * 2}s`,
-    spin: `${(Math.random() - 0.5) * 720}deg`,
-    delay: `${Math.random() * 1.5}s`,
+    x: `${2 + (i * 97 / 35) + (Math.sin(i * 1.7) * 4)}vw`,
+    dur: `${1.4 + (i % 7) * 0.3}s`,
+    spin: `${((i % 2 === 0) ? 1 : -1) * (180 + (i % 5) * 60)}deg`,
+    delay: `${(i * 0.12) % 1.8}s`,
+    ease: i % 3 === 0 ? "ease-in" : i % 3 === 1 ? "ease-in-out" : "linear",
   }));
+
+  const sparkles = [
+    { emoji:"✨", left:"2px",  top:"20px",  sd:"1.1s" },
+    { emoji:"⭐", left:"-18px",top:"80px",  sd:"0.9s" },
+    { emoji:"✨", left:"148px",top:"30px",  sd:"1.3s" },
+    { emoji:"⭐", left:"155px",top:"100px", sd:"0.8s" },
+    { emoji:"💫", left:"60px", top:"-18px", sd:"1.0s" },
+    { emoji:"✨", left:"20px", top:"200px", sd:"1.4s" },
+    { emoji:"💫", left:"130px",top:"180px", sd:"1.2s" },
+  ];
+
+  if (!visible) return null;
 
   return (
     <div className="bigwin-overlay" onClick={onDismiss}>
+      {/* Flying money behind everything */}
       {pieces.map((p) => (
         <span key={p.id} className="money-piece"
-          style={{"--x": p.x, "--dur": p.dur, "--spin": p.spin, animationDelay: p.delay}}>
+          style={{"--x":p.x,"--dur":p.dur,"--spin":p.spin,"--delay":p.delay,"--ease":p.ease,
+                  animationDelay: p.delay, animationTimingFunction: p.ease}}>
           {p.emoji}
         </span>
       ))}
-      <div className="bigwin-card" onClick={(e) => e.stopPropagation()}>
-        <div className="bigwin-label">🔨 SOLD 🔨</div>
+
+      {/* Big Bidder text */}
+      <div className="bigwin-text">
+        <div className="bigwin-label">🔨 sold 🔨</div>
         <div className="bigwin-title">BIG BIDDER!</div>
+      </div>
+
+      {/* Arcade Girl */}
+      <div className="arcade-girl-wrap" onClick={(e) => e.stopPropagation()}>
+        {sparkles.map((s, i) => (
+          <span key={i} className="g-sparkle"
+            style={{left:s.left, top:s.top, "--sd":s.sd}}>
+            {s.emoji}
+          </span>
+        ))}
+        {/* Hair */}
+        <div className="g-hair" />
+        <div className="g-ponytail" />
+        {/* Face */}
+        <div className="g-face">
+          <div className="g-eye-l" />
+          <div className="g-eye-r" />
+          <div className="g-mouth" />
+          <div className="g-blush-l" />
+          <div className="g-blush-r" />
+        </div>
+        {/* Body */}
+        <div className="g-body" />
+        <div className="g-skirt" />
+        {/* Arms & hands */}
+        <div className="g-arm-l" />
+        <div className="g-arm-r" />
+        <div className="g-hand-l" />
+        <div className="g-hand-r" />
+        {/* Legs & shoes */}
+        <div className="g-leg-l" />
+        <div className="g-leg-r" />
+        <div className="g-shoe-l" />
+        <div className="g-shoe-r" />
+      </div>
+
+      {/* Winner info */}
+      <div className="bigwin-text" style={{marginTop:0}}>
         <div className="bigwin-winner">{data.winner}</div>
         <div className="bigwin-amount">${data.amount.toLocaleString()}</div>
         <div className="bigwin-lotname">{data.lotName}</div>
-        <div className="bigwin-dismiss">tap anywhere to dismiss</div>
       </div>
+
+      <div className="bigwin-dismiss" onClick={onDismiss}>tap to dismiss</div>
     </div>
   );
 }
@@ -972,7 +1215,7 @@ export default function CalcuttaApp() {
   const [bidLeft, setBidLeft]       = useState(COUNTDOWN_SECONDS);
   const [justSold, setJustSold]     = useState(null);
   const [customBid, setCustomBid]   = useState("");
-  const [bigWin, setBigWin]         = useState(null); // { winner, amount, lotName }
+  const [bigWin, setBigWin]         = useState(null);
   const pollRef  = useRef(null);
   const timerRef = useRef(null);
 
@@ -1137,7 +1380,7 @@ export default function CalcuttaApp() {
     s.thinkTarget = null; s.countdownTarget = null;
     if (winner !== "Unsold") {
       setJustSold({ lot, winner, amount });
-      if (amount > 500) setBigWin({ winner, amount, lotName: lot.name });
+      if (amount >= 500) setBigWin({ winner, amount, lotName: lot.name });
     }
     await saveState(s); setAppState(s);
   }
