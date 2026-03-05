@@ -808,7 +808,6 @@ const css = `
   ::-webkit-scrollbar-track { background: var(--surface); }
   ::-webkit-scrollbar-thumb { background: var(--dim-green); }
   ::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
-`;
 
 // ── App ────────────────────────────────────────────────────────────────────
 export default function CalcuttaApp() {
