@@ -893,216 +893,76 @@ const css = `
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-  /* ── ARCADE GIRL ── */
+  /* ── DANCING GIRL (SVG) ── */
   .arcade-girl-wrap {
     position: relative; z-index: 10001;
-    width: 160px; height: 260px;
+    width: 200px; height: 340px;
     margin: 0 auto 4px;
-    image-rendering: pixelated;
-    animation: girlBounce 0.45s ease-in-out infinite alternate;
-    cursor: pointer;
+    animation: girlBounce 0.5s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 22px rgba(255,183,0,0.55));
   }
   @keyframes girlBounce {
-    from { transform: translateY(0) scaleX(1); }
-    to   { transform: translateY(-14px) scaleX(1.04); }
+    from { transform: translateY(0); }
+    to   { transform: translateY(-18px); }
   }
+  .girl-svg { width: 100%; height: 100%; overflow: visible; }
 
-  /* Hair */
-  .g-hair {
-    position: absolute; left: 44px; top: 0;
-    width: 72px; height: 38px;
-    background: #f5c842;
-    border-radius: 50% 50% 10% 10%;
-    box-shadow: inset 0 -6px 0 rgba(180,130,0,0.3);
-  }
-  .g-hair::before {
-    content:''; position:absolute;
-    left: -14px; top: 10px;
-    width: 18px; height: 50px;
-    background: #f5c842;
-    border-radius: 30% 0 60% 30%;
-  }
-  .g-hair::after {
-    content:''; position:absolute;
-    right: -14px; top: 10px;
-    width: 18px; height: 50px;
-    background: #f5c842;
-    border-radius: 0 30% 30% 60%;
-  }
-  /* Ponytail */
-  .g-ponytail {
-    position: absolute; right: 22px; top: 22px;
-    width: 14px; height: 40px;
-    background: #f5c842;
-    border-radius: 0 0 50% 50%;
-    transform-origin: top center;
-    animation: ponytailSwing 0.45s ease-in-out infinite alternate;
-  }
-  @keyframes ponytailSwing {
-    from { transform: rotate(-18deg); }
-    to   { transform: rotate(18deg); }
-  }
-  /* Face */
-  .g-face {
-    position: absolute; left: 50px; top: 20px;
-    width: 60px; height: 54px;
-    background: #f9dbb0;
-    border-radius: 40% 40% 48% 48%;
-  }
-  .g-eye-l, .g-eye-r {
-    position: absolute; top: 16px;
-    width: 8px; height: 9px;
-    background: #222;
-    border-radius: 50%;
-  }
-  .g-eye-l { left: 10px; }
-  .g-eye-r { right: 10px; }
-  .g-eye-l::after, .g-eye-r::after {
-    content:''; position:absolute;
-    top:1px; left:2px;
-    width:3px; height:3px;
-    background:#fff; border-radius:50%;
-  }
-  /* Blink */
-  .g-eye-l, .g-eye-r { animation: eyeBlink 2.8s ease-in-out infinite; }
-  @keyframes eyeBlink {
-    0%,44%,48%,100% { transform: scaleY(1); }
-    46% { transform: scaleY(0.08); }
-  }
-  .g-mouth {
-    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-    width: 22px; height: 10px;
-    border-bottom: 3px solid #c0605a;
-    border-radius: 0 0 50% 50%;
-  }
-  .g-blush-l, .g-blush-r {
-    position: absolute; bottom: 16px;
-    width: 12px; height: 7px;
-    background: rgba(255,140,130,0.45);
-    border-radius: 50%;
-  }
-  .g-blush-l { left: 4px; }
-  .g-blush-r { right: 4px; }
-  /* Body / outfit */
-  .g-body {
-    position: absolute; left: 42px; top: 70px;
-    width: 76px; height: 72px;
-    background: #e03c6e;
-    border-radius: 8px 8px 0 0;
-    box-shadow: inset 0 -8px 0 rgba(0,0,0,0.15);
-  }
-  /* Neckline */
-  .g-body::before {
-    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
-    width:24px; height:18px;
-    background: #f9dbb0;
-    border-radius: 0 0 50% 50%;
-  }
-  /* Skirt */
-  .g-skirt {
-    position: absolute; left: 34px; top: 136px;
-    width: 92px; height: 54px;
-    background: #e03c6e;
-    border-radius: 0 0 40% 40%;
-    box-shadow: inset 0 -6px 0 rgba(0,0,0,0.12);
-  }
-  /* Arms */
-  .g-arm-l {
-    position: absolute; left: 18px; top: 74px;
-    width: 28px; height: 14px;
-    background: #f9dbb0;
-    border-radius: 10px;
-    transform-origin: right center;
-    animation: armWaveL 0.45s ease-in-out infinite alternate;
+  .girl-arm-l {
+    transform-origin: 68px 122px;
+    animation: armWaveL 0.5s ease-in-out infinite alternate;
   }
   @keyframes armWaveL {
-    from { transform: rotate(-40deg); }
-    to   { transform: rotate(-70deg); }
+    from { transform: rotate(5deg); }
+    to   { transform: rotate(-65deg); }
   }
-  .g-arm-r {
-    position: absolute; right: 18px; top: 74px;
-    width: 28px; height: 14px;
-    background: #f9dbb0;
-    border-radius: 10px;
-    transform-origin: left center;
-    animation: armWaveR 0.45s ease-in-out infinite alternate;
+  .girl-arm-r {
+    transform-origin: 132px 122px;
+    animation: armWaveR 0.5s ease-in-out infinite alternate;
   }
   @keyframes armWaveR {
-    from { transform: rotate(40deg); }
-    to   { transform: rotate(70deg); }
+    from { transform: rotate(-5deg); }
+    to   { transform: rotate(65deg); }
   }
-  /* Hands */
-  .g-hand-l {
-    position:absolute; left: 6px; top: 66px;
-    width: 16px; height: 16px;
-    background: #f9dbb0; border-radius:50%;
-    animation: handWaveL 0.45s ease-in-out infinite alternate;
-    transform-origin: center bottom;
+  .girl-leg-l {
+    transform-origin: 82px 212px;
+    animation: legL 0.5s ease-in-out infinite alternate;
   }
-  @keyframes handWaveL {
-    from { transform: translate(-24px, -28px) rotate(-10deg); }
-    to   { transform: translate(-34px, -46px) rotate(10deg); }
-  }
-  .g-hand-r {
-    position:absolute; right: 6px; top: 66px;
-    width: 16px; height: 16px;
-    background: #f9dbb0; border-radius:50%;
-    animation: handWaveR 0.45s ease-in-out infinite alternate;
-    transform-origin: center bottom;
-  }
-  @keyframes handWaveR {
-    from { transform: translate(24px, -28px) rotate(10deg); }
-    to   { transform: translate(34px, -46px) rotate(-10deg); }
-  }
-  /* Legs */
-  .g-leg-l {
-    position: absolute; left: 52px; top: 186px;
-    width: 24px; height: 50px;
-    background: #f9dbb0; border-radius: 4px;
-    transform-origin: top center;
-    animation: legKickL 0.45s ease-in-out infinite alternate;
-  }
-  @keyframes legKickL {
-    from { transform: rotate(-8deg); }
+  @keyframes legL {
+    from { transform: rotate(-14deg); }
     to   { transform: rotate(8deg); }
   }
-  .g-leg-r {
-    position: absolute; right: 52px; top: 186px;
-    width: 24px; height: 50px;
-    background: #f9dbb0; border-radius: 4px;
-    transform-origin: top center;
-    animation: legKickR 0.45s ease-in-out infinite alternate;
+  .girl-leg-r {
+    transform-origin: 118px 212px;
+    animation: legR 0.5s ease-in-out infinite alternate;
   }
-  @keyframes legKickR {
-    from { transform: rotate(8deg); }
+  @keyframes legR {
+    from { transform: rotate(14deg); }
     to   { transform: rotate(-8deg); }
   }
-  /* Shoes */
-  .g-shoe-l {
-    position: absolute; left: 44px; top: 230px;
-    width: 30px; height: 14px;
-    background: #222; border-radius: 4px 10px 10px 4px;
-    animation: legKickL 0.45s ease-in-out infinite alternate;
-    transform-origin: top center;
+  .girl-ponytail {
+    transform-origin: 138px 52px;
+    animation: ponytail 0.5s ease-in-out infinite alternate;
   }
-  .g-shoe-r {
-    position: absolute; right: 44px; top: 230px;
-    width: 30px; height: 14px;
-    background: #222; border-radius: 10px 4px 4px 10px;
-    animation: legKickR 0.45s ease-in-out infinite alternate;
-    transform-origin: top center;
+  @keyframes ponytail {
+    from { transform: rotate(-14deg); }
+    to   { transform: rotate(18deg); }
+  }
+  .girl-eye-l { transform-origin: 81px 82px; animation: eyeBlink 3s ease-in-out infinite; }
+  .girl-eye-r { transform-origin: 119px 82px; animation: eyeBlink 3s ease-in-out infinite; }
+  @keyframes eyeBlink {
+    0%,42%,46%,100% { transform: scaleY(1); }
+    44% { transform: scaleY(0.06); }
   }
   /* Sparkles around girl */
   .g-sparkle {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     animation: sparkleSpin var(--sd) linear infinite;
-    opacity: 0.9;
   }
   @keyframes sparkleSpin {
-    0%   { transform: rotate(0deg)   scale(1);   opacity:0.6; }
-    50%  { transform: rotate(180deg) scale(1.3); opacity:1; }
-    100% { transform: rotate(360deg) scale(1);   opacity:0.6; }
+    0%   { transform: rotate(0deg)   scale(1);   opacity:0.7; }
+    50%  { transform: rotate(180deg) scale(1.4); opacity:1; }
+    100% { transform: rotate(360deg) scale(1);   opacity:0.7; }
   }
 `;
 
@@ -1164,30 +1024,173 @@ function BigWinOverlay({ data, onDismiss }) {
             {s.emoji}
           </span>
         ))}
-        {/* Hair */}
-        <div className="g-hair" />
-        <div className="g-ponytail" />
-        {/* Face */}
-        <div className="g-face">
-          <div className="g-eye-l" />
-          <div className="g-eye-r" />
-          <div className="g-mouth" />
-          <div className="g-blush-l" />
-          <div className="g-blush-r" />
-        </div>
-        {/* Body */}
-        <div className="g-body" />
-        <div className="g-skirt" />
-        {/* Arms & hands */}
-        <div className="g-arm-l" />
-        <div className="g-arm-r" />
-        <div className="g-hand-l" />
-        <div className="g-hand-r" />
-        {/* Legs & shoes */}
-        <div className="g-leg-l" />
-        <div className="g-leg-r" />
-        <div className="g-shoe-l" />
-        <div className="g-shoe-r" />
+        <svg className="girl-svg" viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="skinGrad" cx="50%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#fde5c0"/>
+              <stop offset="100%" stopColor="#edb87a"/>
+            </radialGradient>
+            <radialGradient id="hairGrad" cx="40%" cy="25%" r="70%">
+              <stop offset="0%" stopColor="#ffe57a"/>
+              <stop offset="60%" stopColor="#d4a020"/>
+              <stop offset="100%" stopColor="#a87010"/>
+            </radialGradient>
+            <linearGradient id="topGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#c8a055"/>
+              <stop offset="100%" stopColor="#9a7535"/>
+            </linearGradient>
+            <linearGradient id="shortsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#2a2018"/>
+              <stop offset="100%" stopColor="#1a1208"/>
+            </linearGradient>
+            <radialGradient id="legGrad" cx="30%" cy="20%" r="80%">
+              <stop offset="0%" stopColor="#fde5c0"/>
+              <stop offset="100%" stopColor="#d4956a"/>
+            </radialGradient>
+          </defs>
+
+          {/* ── LEFT ARM (waving up) ── */}
+          <g className="girl-arm-l">
+            <ellipse cx="60" cy="140" rx="10" ry="28" fill="url(#skinGrad)" transform="rotate(-20 68 120)"/>
+            <ellipse cx="45" cy="115" rx="9" ry="24" fill="url(#skinGrad)" transform="rotate(-35 60 130)"/>
+            {/* Hand with fingers suggested */}
+            <ellipse cx="34" cy="93" rx="11" ry="9" fill="url(#skinGrad)" transform="rotate(-15 45 108)"/>
+            <path d="M27 89 Q34 82 41 89" stroke="url(#skinGrad)" strokeWidth="5" fill="none" strokeLinecap="round"/>
+          </g>
+
+          {/* ── RIGHT ARM (waving up) ── */}
+          <g className="girl-arm-r">
+            <ellipse cx="140" cy="140" rx="10" ry="28" fill="url(#skinGrad)" transform="rotate(20 132 120)"/>
+            <ellipse cx="155" cy="115" rx="9" ry="24" fill="url(#skinGrad)" transform="rotate(35 140 130)"/>
+            <ellipse cx="166" cy="93" rx="11" ry="9" fill="url(#skinGrad)" transform="rotate(15 155 108)"/>
+            <path d="M159 89 Q166 82 173 89" stroke="url(#skinGrad)" strokeWidth="5" fill="none" strokeLinecap="round"/>
+          </g>
+
+          {/* ── CROP TOP ── */}
+          <path d="M72 122 Q68 148 70 158 Q84 166 100 166 Q116 166 130 158 Q132 148 128 122 Q114 113 100 112 Q86 113 72 122Z"
+            fill="url(#topGrad)"/>
+          {/* Top highlight */}
+          <path d="M80 118 Q100 112 120 118 Q108 114 100 114 Q92 114 80 118Z"
+            fill="rgba(255,235,180,0.3)"/>
+          {/* Midriff — bare skin between top and shorts */}
+          <path d="M70 158 Q84 166 100 167 Q116 166 130 158 Q132 168 130 178 Q116 184 100 184 Q84 184 70 178 Q68 168 70 158Z"
+            fill="url(#skinGrad)"/>
+          {/* Belly button */}
+          <ellipse cx="100" cy="174" rx="3" ry="2" fill="rgba(160,100,50,0.4)"/>
+
+          {/* ── SHORTS ── */}
+          <path d="M70 178 Q68 195 72 212 Q84 218 100 218 Q116 218 128 212 Q132 195 130 178 Q116 184 100 184 Q84 184 70 178Z"
+            fill="url(#shortsGrad)"/>
+          {/* Belt */}
+          <path d="M70 178 Q84 184 100 184 Q116 184 130 178 Q116 182 100 182 Q84 182 70 178Z"
+            fill="#5a4020"/>
+          <rect x="94" y="177" width="12" height="8" rx="2" fill="#c8a030"/>
+
+          {/* ── NECK ── */}
+          <rect x="90" y="98" width="20" height="18" rx="9" fill="url(#skinGrad)"/>
+
+          {/* ── HAIR (back/long) ── */}
+          <path d="M65 60 Q44 95 46 145 Q50 165 58 175 Q52 140 60 105 Q65 82 68 65Z"
+            fill="url(#hairGrad)" opacity="0.85"/>
+          <path d="M135 60 Q156 95 154 145 Q150 165 142 175 Q148 140 140 105 Q135 82 132 65Z"
+            fill="url(#hairGrad)" opacity="0.85"/>
+
+          {/* ── HEAD ── */}
+          <ellipse cx="100" cy="68" rx="36" ry="40" fill="url(#skinGrad)"/>
+
+          {/* ── HAIR (front) ── */}
+          <path d="M64 56 Q68 24 100 18 Q132 24 136 56 Q128 40 100 38 Q72 40 64 56Z"
+            fill="url(#hairGrad)"/>
+          <path d="M64 56 Q57 66 58 80 Q60 70 67 65 Q66 60 64 56Z" fill="url(#hairGrad)"/>
+          <path d="M136 56 Q143 66 142 80 Q140 70 133 65 Q134 60 136 56Z" fill="url(#hairGrad)"/>
+          {/* Shine streak */}
+          <path d="M80 24 Q100 18 116 26 Q102 20 100 20 Q90 20 80 24Z"
+            fill="rgba(255,250,180,0.65)"/>
+
+          {/* ── PONYTAIL ── */}
+          <g className="girl-ponytail">
+            <path d="M132 52 Q148 48 160 60 Q165 82 156 106 Q148 90 140 76 Q137 62 132 52Z"
+              fill="url(#hairGrad)"/>
+            <path d="M156 106 Q160 126 153 144 Q146 128 144 114 Q151 110 156 106Z"
+              fill="#b07e10"/>
+          </g>
+
+          {/* ── EYEBROWS ── */}
+          <path d="M72 72 Q81 67 90 70" stroke="#8B5A14" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
+          <path d="M110 70 Q119 67 128 72" stroke="#8B5A14" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
+
+          {/* ── EYES ── */}
+          <g className="girl-eye-l">
+            <ellipse cx="81" cy="82" rx="11" ry="8.5" fill="white"/>
+            <ellipse cx="81" cy="82" rx="7.5" ry="7.5" fill="#5a9ee0"/>
+            <ellipse cx="81" cy="82" rx="4.5" ry="4.5" fill="#1a1228"/>
+            <ellipse cx="83" cy="79" rx="2.2" ry="2.2" fill="white"/>
+            <ellipse cx="78" cy="83" rx="1" ry="1" fill="rgba(255,255,255,0.5)"/>
+            {/* Lashes */}
+            <path d="M70 76 Q81 72 92 76" stroke="#1a0a00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+            <line x1="70" y1="76" x2="68" y2="72" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="75" y1="73" x2="74" y2="69" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="81" y1="72" x2="81" y2="68" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="87" y1="73" x2="88" y2="69" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="92" y1="76" x2="94" y2="72" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+          </g>
+          <g className="girl-eye-r">
+            <ellipse cx="119" cy="82" rx="11" ry="8.5" fill="white"/>
+            <ellipse cx="119" cy="82" rx="7.5" ry="7.5" fill="#5a9ee0"/>
+            <ellipse cx="119" cy="82" rx="4.5" ry="4.5" fill="#1a1228"/>
+            <ellipse cx="121" cy="79" rx="2.2" ry="2.2" fill="white"/>
+            <ellipse cx="116" cy="83" rx="1" ry="1" fill="rgba(255,255,255,0.5)"/>
+            <path d="M108 76 Q119 72 130 76" stroke="#1a0a00" strokeWidth="2" fill="none" strokeLinecap="round"/>
+            <line x1="108" y1="76" x2="106" y2="72" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="113" y1="73" x2="112" y2="69" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="119" y1="72" x2="119" y2="68" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="125" y1="73" x2="126" y2="69" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="130" y1="76" x2="132" y2="72" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
+          </g>
+
+          {/* ── NOSE ── */}
+          <path d="M96 88 Q100 95 104 88" stroke="#c8845a" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+          <ellipse cx="96" cy="91" rx="2.5" ry="1.8" fill="rgba(180,100,60,0.25)"/>
+          <ellipse cx="104" cy="91" rx="2.5" ry="1.8" fill="rgba(180,100,60,0.25)"/>
+
+          {/* ── BLUSH ── */}
+          <ellipse cx="68" cy="94" rx="11" ry="6" fill="rgba(255,150,130,0.32)"/>
+          <ellipse cx="132" cy="94" rx="11" ry="6" fill="rgba(255,150,130,0.32)"/>
+
+          {/* ── MOUTH ── */}
+          <path d="M87 104 Q100 115 113 104" stroke="#c05060" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
+          <path d="M89 106 Q100 113 111 106 Q100 114 89 106Z" fill="white" opacity="0.85"/>
+          <path d="M87 104 Q100 108 113 104 Q100 107 87 104Z" fill="#e06070" opacity="0.7"/>
+          <ellipse cx="100" cy="111" rx="10" ry="4.5" fill="rgba(210,70,90,0.45)"/>
+
+          {/* ── LEGS ── */}
+          <g className="girl-leg-l">
+            {/* Thigh */}
+            <path d="M72 212 Q68 245 70 272 Q78 278 88 276 Q96 274 94 268 Q92 244 90 212Z"
+              fill="url(#legGrad)"/>
+            {/* Knee highlight */}
+            <ellipse cx="82" cy="272" rx="10" ry="7" fill="rgba(255,230,190,0.4)"/>
+            {/* Shin */}
+            <path d="M70 272 Q68 298 72 318 Q79 324 87 320 Q92 316 90 310 Q88 292 88 276 Q96 274 94 268 Q88 268 82 270 Q76 270 70 272Z"
+              fill="url(#legGrad)"/>
+            {/* Boot */}
+            <path d="M70 316 Q72 332 76 338 Q82 342 90 340 Q96 336 94 328 Q92 322 90 318Z"
+              fill="#1e1208"/>
+            <path d="M68 316 Q70 324 72 326 Q76 322 86 322 Q90 322 92 318 Q88 316 80 315 Q74 315 68 316Z"
+              fill="#2e1e10"/>
+          </g>
+          <g className="girl-leg-r">
+            <path d="M128 212 Q132 245 130 272 Q122 278 112 276 Q104 274 106 268 Q108 244 110 212Z"
+              fill="url(#legGrad)"/>
+            <ellipse cx="118" cy="272" rx="10" ry="7" fill="rgba(255,230,190,0.4)"/>
+            <path d="M130 272 Q132 298 128 318 Q121 324 113 320 Q108 316 110 310 Q112 292 112 276 Q104 274 106 268 Q112 268 118 270 Q124 270 130 272Z"
+              fill="url(#legGrad)"/>
+            <path d="M130 316 Q128 332 124 338 Q118 342 110 340 Q104 336 106 328 Q108 322 110 318Z"
+              fill="#1e1208"/>
+            <path d="M132 316 Q130 324 128 326 Q124 322 114 322 Q110 322 108 318 Q112 316 120 315 Q126 315 132 316Z"
+              fill="#2e1e10"/>
+          </g>
+        </svg>
       </div>
 
       {/* Winner info */}
