@@ -1,4 +1,3 @@
-}
 import { useState, useEffect, useCallback, useRef } from "react";
 import { storageGet, storageSet, storageSubscribe } from "./firebase.js";
 
@@ -1068,7 +1067,7 @@ function BigWinOverlay({ data, onDismiss }) {
           <div className="girl-sign-stick" />
         </div>
         <img
-          src="https://i.imgur.com/S1UkZR5.jpeg"
+          src="https://i.postimg.cc/j2QMmGFm/aiperfectportraits-ai-generated-8940037-1280.jpg"
           alt="Big Bidder"
           style={{
             height: "280px",
