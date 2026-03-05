@@ -808,7 +808,156 @@ const css = `
   ::-webkit-scrollbar-track { background: var(--surface); }
   ::-webkit-scrollbar-thumb { background: var(--dim-green); }
   ::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
+
+  /* ── BIG WIN OVERLAY ── */
+  .bigwin-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.85);
+    display: flex; align-items: center; justify-content: center;
+    animation: bwFadeIn 0.3s ease-out;
+    cursor: pointer;
+  }
+  @keyframes bwFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .bigwin-card {
+    background: var(--felt);
+    border: 3px solid var(--neon-amber);
+    box-shadow: 0 0 60px rgba(255,183,0,0.5), 0 0 120px rgba(255,183,0,0.2), inset 0 0 40px rgba(255,183,0,0.05);
+    padding: 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 560px;
+    width: 90%;
+    animation: bwPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes bwPop {
+    from { transform: scale(0.5) rotate(-3deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .bigwin-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,183,0,0.02) 10px, rgba(255,183,0,0.02) 11px);
+    pointer-events: none;
+  }
+
+  .bigwin-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    color: var(--neon-amber);
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255,183,0,0.8);
+    margin-bottom: 8px;
+    animation: flicker 0.15s ease-in-out infinite alternate;
+  }
+  @keyframes flicker {
+    from { opacity: 0.85; text-shadow: 0 0 10px rgba(255,183,0,0.6); }
+    to   { opacity: 1;    text-shadow: 0 0 20px rgba(255,183,0,1), 0 0 40px rgba(255,183,0,0.5); }
+  }
+
+  .bigwin-title {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: var(--neon-amber);
+    text-transform: uppercase;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,183,0,0.9), 0 0 60px rgba(255,183,0,0.4);
+    margin-bottom: 16px;
+    animation: bigwinPulse 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes bigwinPulse {
+    from { transform: scale(1);    text-shadow: 0 0 20px rgba(255,183,0,0.7); }
+    to   { transform: scale(1.04); text-shadow: 0 0 40px rgba(255,183,0,1), 0 0 80px rgba(255,183,0,0.5); }
+  }
+
+  .bigwin-winner {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    text-shadow: 0 0 16px rgba(57,255,106,0.8);
+    margin-bottom: 6px;
+  }
+  .bigwin-amount {
+    font-family: var(--font-mono);
+    font-size: 3.2rem;
+    color: var(--neon-green);
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(57,255,106,0.9), 0 0 50px rgba(57,255,106,0.4);
+    margin-bottom: 6px;
+  }
+  .bigwin-lotname {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .bigwin-dismiss {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* Flying money */
+  .money-piece {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 10000;
+    animation: moneyFly var(--dur) ease-in forwards;
+    left: var(--x);
+    top: -60px;
+  }
+  @keyframes moneyFly {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(var(--spin)) scale(0.8); opacity: 0; }
+  }
 `;
+
+// ── Big Win Overlay ────────────────────────────────────────────────────────
+function BigWinOverlay({ data, onDismiss }) {
+  const moneyEmojis = ["💵","💴","💶","💷","💰","🤑","💸"];
+  const pieces = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    emoji: moneyEmojis[i % moneyEmojis.length],
+    x: `${Math.random() * 100}vw`,
+    dur: `${1.2 + Math.random() * 2}s`,
+    spin: `${(Math.random() - 0.5) * 720}deg`,
+    delay: `${Math.random() * 1.5}s`,
+  }));
+
+  return (
+    <div className="bigwin-overlay" onClick={onDismiss}>
+      {pieces.map((p) => (
+        <span key={p.id} className="money-piece"
+          style={{"--x": p.x, "--dur": p.dur, "--spin": p.spin, animationDelay: p.delay}}>
+          {p.emoji}
+        </span>
+      ))}
+      <div className="bigwin-card" onClick={(e) => e.stopPropagation()}>
+        <div className="bigwin-label">🔨 SOLD 🔨</div>
+        <div className="bigwin-title">BIG BIDDER!</div>
+        <div className="bigwin-winner">{data.winner}</div>
+        <div className="bigwin-amount">${data.amount.toLocaleString()}</div>
+        <div className="bigwin-lotname">{data.lotName}</div>
+        <div className="bigwin-dismiss">tap anywhere to dismiss</div>
+      </div>
+    </div>
+  );
+}
 
 // ── App ────────────────────────────────────────────────────────────────────
 export default function CalcuttaApp() {
@@ -823,6 +972,7 @@ export default function CalcuttaApp() {
   const [bidLeft, setBidLeft]       = useState(COUNTDOWN_SECONDS);
   const [justSold, setJustSold]     = useState(null);
   const [customBid, setCustomBid]   = useState("");
+  const [bigWin, setBigWin]         = useState(null); // { winner, amount, lotName }
   const pollRef  = useRef(null);
   const timerRef = useRef(null);
 
@@ -985,7 +1135,10 @@ export default function CalcuttaApp() {
     s.auctionLog.push({ lotId: s.currentLotId, winner, amount, lotName: lot.name });
     s.currentLotId = null; s.currentBid = 0; s.currentBidder = null;
     s.thinkTarget = null; s.countdownTarget = null;
-    if (winner !== "Unsold") setJustSold({ lot, winner, amount });
+    if (winner !== "Unsold") {
+      setJustSold({ lot, winner, amount });
+      if (amount > 500) setBigWin({ winner, amount, lotName: lot.name });
+    }
     await saveState(s); setAppState(s);
   }
 
@@ -1093,6 +1246,7 @@ export default function CalcuttaApp() {
   return (
     <>
       <style>{css}</style>
+      {bigWin && <BigWinOverlay data={bigWin} onDismiss={() => setBigWin(null)} />}
       <div className="app">
         {/* Header */}
         <div className="header">
