@@ -1,3 +1,4 @@
+}
 import { useState, useEffect, useCallback, useRef } from "react";
 import { storageGet, storageSet, storageSubscribe } from "./firebase.js";
 
@@ -897,11 +898,51 @@ const css = `
   .arcade-girl-wrap {
     position: relative; z-index: 10001;
     margin: 0 auto 4px;
-    animation: girlBounce 0.55s ease-in-out infinite alternate;
+    animation: girlSway 0.6s ease-in-out infinite alternate;
   }
-  @keyframes girlBounce {
-    from { transform: translateY(0) scale(1); }
-    to   { transform: translateY(-20px) scale(1.03); }
+  @keyframes girlSway {
+    from { transform: translateY(0px) rotate(-3deg) scale(1); }
+    to   { transform: translateY(-14px) rotate(3deg) scale(1.04); }
+  }
+  .girl-sign-wrap {
+    position: absolute;
+    top: -70px; left: 50%; transform: translateX(-50%);
+    z-index: 10002;
+    animation: signWobble 0.6s ease-in-out infinite alternate;
+    white-space: nowrap;
+  }
+  @keyframes signWobble {
+    from { transform: translateX(-50%) rotate(-6deg) translateY(0px); }
+    to   { transform: translateX(-50%) rotate(6deg) translateY(-8px); }
+  }
+  .girl-sign {
+    background: linear-gradient(135deg, #ff6bae, #c0185a);
+    border: 3px solid var(--neon-amber);
+    box-shadow: 0 0 20px rgba(255,183,0,0.7), 0 0 40px rgba(255,107,174,0.4);
+    padding: 8px 22px;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,183,0,0.9), 2px 2px 0px rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    position: relative;
+  }
+  .girl-sign::before, .girl-sign::after {
+    content: '✨';
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    font-size: 1.2rem;
+  }
+  .girl-sign::before { left: -24px; }
+  .girl-sign::after  { right: -24px; }
+  /* Sign stick */
+  .girl-sign-stick {
+    width: 4px; height: 30px;
+    background: linear-gradient(to bottom, var(--neon-amber), #8a6000);
+    margin: 0 auto;
+    box-shadow: 0 0 8px rgba(255,183,0,0.5);
   }
 
   .girl-arm-l {
@@ -1021,15 +1062,21 @@ function BigWinOverlay({ data, onDismiss }) {
             {s.emoji}
           </span>
         ))}
+        {/* Sign held above her head */}
+        <div className="girl-sign-wrap">
+          <div className="girl-sign">BIG BIDDER</div>
+          <div className="girl-sign-stick" />
+        </div>
         <img
-          src="https://i.imgur.com/uhWgG5h.jpg"
+          src="https://i.imgur.com/S1UkZR5.jpeg"
           alt="Big Bidder"
           style={{
-            height: "320px",
+            height: "280px",
             objectFit: "contain",
             objectPosition: "top",
-            filter: "drop-shadow(0 0 24px rgba(255,183,0,0.7))",
-            imageRendering: "auto",
+            filter: "drop-shadow(0 0 28px rgba(255,183,0,0.6)) drop-shadow(0 4px 16px rgba(0,0,0,0.8))",
+            display: "block",
+            marginTop: "8px",
           }}
         />
       </div>
