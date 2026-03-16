@@ -153,7 +153,6 @@ const FIRST_ROUND_MATCHUPS = {
   "Midwest-10": "vs. #7 Kentucky Wildcats",
   "Midwest-11": "vs. #6 Tennessee Volunteers",
   "Midwest-12": "vs. #5 Texas Tech Red Raiders",
-}
 };
 
 
