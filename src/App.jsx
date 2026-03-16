@@ -3,96 +3,95 @@ import { storageGet, storageSet, storageSubscribe } from "./firebase.js";
 
 // ── Teams: seeds 1-12 individually, seeds 13-16 grouped by region ──────────
 const INDIVIDUAL_TEAMS = [
-  // East
-  { id: 1,  name: "Duke Blue Devils",        seed: 1,  region: "East" },
-  { id: 2,  name: "Tennessee Volunteers",    seed: 2,  region: "East" },
-  { id: 3,  name: "Iowa State Cyclones",     seed: 3,  region: "East" },
-  { id: 4,  name: "Maryland Terrapins",      seed: 4,  region: "East" },
-  { id: 5,  name: "Mississippi State",       seed: 5,  region: "East" },
-  { id: 6,  name: "BYU Cougars",             seed: 6,  region: "East" },
-  { id: 7,  name: "Saint Mary's Gaels",      seed: 7,  region: "East" },
-  { id: 8,  name: "Louisville Cardinals",    seed: 8,  region: "East" },
-  { id: 9,  name: "Creighton Bluejays",      seed: 9,  region: "East" },
-  { id: 10, name: "New Mexico Lobos",        seed: 10, region: "East" },
-  { id: 11, name: "NC State Wolfpack",       seed: 11, region: "East" },
-  { id: 12, name: "McNeese Cowboys",         seed: 12, region: "East" },
-  // West
-  { id: 17, name: "Auburn Tigers",           seed: 1,  region: "West" },
-  { id: 18, name: "Michigan State Spartans", seed: 2,  region: "West" },
-  { id: 19, name: "Wisconsin Badgers",       seed: 3,  region: "West" },
-  { id: 20, name: "Texas A&M Aggies",        seed: 4,  region: "West" },
-  { id: 21, name: "Oregon Ducks",            seed: 5,  region: "West" },
-  { id: 22, name: "Missouri Tigers",         seed: 6,  region: "West" },
-  { id: 23, name: "Marquette Golden Eagles", seed: 7,  region: "West" },
-  { id: 24, name: "Cincinnati Bearcats",     seed: 8,  region: "West" },
-  { id: 25, name: "Oklahoma Sooners",        seed: 9,  region: "West" },
-  { id: 26, name: "Arkansas Razorbacks",     seed: 10, region: "West" },
-  { id: 27, name: "Drake Bulldogs",          seed: 11, region: "West" },
-  { id: 28, name: "UC San Diego Tritons",    seed: 12, region: "West" },
-  // South
-  { id: 33, name: "Florida Gators",          seed: 1,  region: "South" },
-  { id: 34, name: "St. John's Red Storm",    seed: 2,  region: "South" },
-  { id: 35, name: "Kansas Jayhawks",         seed: 3,  region: "South" },
-  { id: 36, name: "Texas Longhorns",         seed: 4,  region: "South" },
-  { id: 37, name: "Memphis Tigers",          seed: 5,  region: "South" },
-  { id: 38, name: "Illinois Fighting Illini",seed: 6,  region: "South" },
-  { id: 39, name: "UCLA Bruins",             seed: 7,  region: "South" },
-  { id: 40, name: "UConn Huskies",           seed: 8,  region: "South" },
-  { id: 41, name: "Georgia Bulldogs",        seed: 9,  region: "South" },
-  { id: 42, name: "Vanderbilt Commodores",   seed: 10, region: "South" },
-  { id: 43, name: "VCU Rams",               seed: 11, region: "South" },
-  { id: 44, name: "Colorado State Rams",     seed: 12, region: "South" },
-  // Midwest
-  { id: 49, name: "Houston Cougars",         seed: 1,  region: "Midwest" },
-  { id: 50, name: "Alabama Crimson Tide",    seed: 2,  region: "Midwest" },
-  { id: 51, name: "Kentucky Wildcats",       seed: 3,  region: "Midwest" },
-  { id: 52, name: "Purdue Boilermakers",     seed: 4,  region: "Midwest" },
-  { id: 53, name: "Clemson Tigers",          seed: 5,  region: "Midwest" },
-  { id: 54, name: "Dayton Flyers",           seed: 6,  region: "Midwest" },
-  { id: 55, name: "Gonzaga Bulldogs",        seed: 7,  region: "Midwest" },
-  { id: 56, name: "Northwestern Wildcats",   seed: 8,  region: "Midwest" },
-  { id: 57, name: "Boise State Broncos",     seed: 9,  region: "Midwest" },
-  { id: 58, name: "New Mexico Lobos",        seed: 10, region: "Midwest" },
-  { id: 59, name: "San Diego State Aztecs",  seed: 11, region: "Midwest" },
-  { id: 60, name: "Liberty Flames",          seed: 12, region: "Midwest" },
+  // EAST (Duke #1 overall seed)
+  { id: 1,  name: "Duke Blue Devils",         seed: 1,  region: "East" },
+  { id: 2,  name: "UConn Huskies",            seed: 2,  region: "East" },
+  { id: 3,  name: "Michigan State Spartans",  seed: 3,  region: "East" },
+  { id: 4,  name: "Kansas Jayhawks",          seed: 4,  region: "East" },
+  { id: 5,  name: "St. John's Red Storm",    seed: 5,  region: "East" },
+  { id: 6,  name: "Louisville Cardinals",     seed: 6,  region: "East" },
+  { id: 7,  name: "UCLA Bruins",              seed: 7,  region: "East" },
+  { id: 8,  name: "Ohio State Buckeyes",      seed: 8,  region: "East" },
+  { id: 9,  name: "TCU Horned Frogs",         seed: 9,  region: "East" },
+  { id: 10, name: "UCF Knights",              seed: 10, region: "East" },
+  { id: 11, name: "South Florida Bulls",      seed: 11, region: "East" },
+  { id: 12, name: "Northern Iowa Panthers",   seed: 12, region: "East" },
+  // WEST (Arizona #1 seed)
+  { id: 17, name: "Arizona Wildcats",         seed: 1,  region: "West" },
+  { id: 18, name: "Purdue Boilermakers",      seed: 2,  region: "West" },
+  { id: 19, name: "Gonzaga Bulldogs",         seed: 3,  region: "West" },
+  { id: 20, name: "Arkansas Razorbacks",      seed: 4,  region: "West" },
+  { id: 21, name: "Wisconsin Badgers",        seed: 5,  region: "West" },
+  { id: 22, name: "BYU Cougars",              seed: 6,  region: "West" },
+  { id: 23, name: "Miami Hurricanes",         seed: 7,  region: "West" },
+  { id: 24, name: "Villanova Wildcats",       seed: 8,  region: "West" },
+  { id: 25, name: "Utah State Aggies",        seed: 9,  region: "West" },
+  { id: 26, name: "Missouri Tigers",          seed: 10, region: "West" },
+  { id: 27, name: "NC State/Texas (FF)",      seed: 11, region: "West" },
+  { id: 28, name: "High Point Panthers",      seed: 12, region: "West" },
+  // SOUTH (Florida #1 seed)
+  { id: 33, name: "Florida Gators",           seed: 1,  region: "South" },
+  { id: 34, name: "Houston Cougars",          seed: 2,  region: "South" },
+  { id: 35, name: "Illinois Fighting Illini", seed: 3,  region: "South" },
+  { id: 36, name: "Nebraska Cornhuskers",     seed: 4,  region: "South" },
+  { id: 37, name: "Vanderbilt Commodores",    seed: 5,  region: "South" },
+  { id: 38, name: "North Carolina Tar Heels", seed: 6,  region: "South" },
+  { id: 39, name: "Saint Mary's Gaels",      seed: 7,  region: "South" },
+  { id: 40, name: "Clemson Tigers",           seed: 8,  region: "South" },
+  { id: 41, name: "Iowa Hawkeyes",            seed: 9,  region: "South" },
+  { id: 42, name: "Texas A&M Aggies",         seed: 10, region: "South" },
+  { id: 43, name: "VCU Rams",                 seed: 11, region: "South" },
+  { id: 44, name: "McNeese Cowboys",          seed: 12, region: "South" },
+  // MIDWEST (Michigan #1 seed)
+  { id: 49, name: "Michigan Wolverines",      seed: 1,  region: "Midwest" },
+  { id: 50, name: "Iowa State Cyclones",      seed: 2,  region: "Midwest" },
+  { id: 51, name: "Virginia Cavaliers",       seed: 3,  region: "Midwest" },
+  { id: 52, name: "Alabama Crimson Tide",     seed: 4,  region: "Midwest" },
+  { id: 53, name: "Texas Tech Red Raiders",   seed: 5,  region: "Midwest" },
+  { id: 54, name: "Tennessee Volunteers",     seed: 6,  region: "Midwest" },
+  { id: 55, name: "Kentucky Wildcats",        seed: 7,  region: "Midwest" },
+  { id: 56, name: "Georgia Bulldogs",         seed: 8,  region: "Midwest" },
+  { id: 57, name: "Saint Louis Billikens",    seed: 9,  region: "Midwest" },
+  { id: 58, name: "Santa Clara Broncos",      seed: 10, region: "Midwest" },
+  { id: 59, name: "SMU/Miami OH (FF)",        seed: 11, region: "Midwest" },
+  { id: 60, name: "Akron Zips",               seed: 12, region: "Midwest" },
 ];
 
 // 13-16 seed group lots — one per region, including First Four matchups
-// First Four teams are marked with ⚔️ — you own whichever one advances
 const GROUP_LOTS = [
   { id: "g-east", name: "East 13-16 Seeds", seed: null, region: "East", isGroup: true,
-    firstFour: [{ seed: 16, teams: "SIUE Cougars vs Texas Southern" }],
+    firstFour: [],
     teams: [
-      "High Point Panthers (#13)",
-      "Troy Trojans (#14)",
-      "Wofford Terriers (#15)",
-      "⚔️ #16 First Four: SIUE Cougars vs Texas Southern (winner advances)",
+      "Cal Baptist Lancers (#13)",
+      "North Dakota State Bison (#14)",
+      "Furman Paladins (#15)",
+      "Siena Saints (#16)",
     ]},
   { id: "g-west", name: "West 13-16 Seeds", seed: null, region: "West", isGroup: true,
-    firstFour: [{ seed: 16, teams: "Bethune-Cookman vs Howard" }],
+    firstFour: [],
     teams: [
-      "Yale Bulldogs (#13)",
-      "Lipscomb Bisons (#14)",
-      "Bryant Bulldogs (#15)",
-      "⚔️ #16 First Four: Bethune-Cookman vs Howard (winner advances)",
+      "Hawaii Warriors (#13)",
+      "Kennesaw State Owls (#14)",
+      "Queens Royals (#15)",
+      "Long Island Sharks (#16)",
     ]},
   { id: "g-south", name: "South 13-16 Seeds", seed: null, region: "South", isGroup: true,
-    firstFour: [{ seed: 11, teams: "VCU Rams vs New Mexico Lobos" }],
+    firstFour: [{ seed: 16, teams: "Lehigh vs Prairie View A&M" }],
     teams: [
-      "Grand Canyon Antelopes (#13)",
-      "Akron Zips (#14)",
-      "Montana Grizzlies (#15)",
-      "Norfolk State Spartans (#16)",
-      "⚔️ #11 First Four: VCU Rams vs New Mexico Lobos (winner advances)",
+      "Troy Trojans (#13)",
+      "Penn Quakers (#14)",
+      "Idaho Vandals (#15)",
+      "⚔️ #16 First Four: Lehigh vs Prairie View A&M (winner advances)",
     ]},
   { id: "g-midwest", name: "Midwest 13-16 Seeds", seed: null, region: "Midwest", isGroup: true,
-    firstFour: [{ seed: 11, teams: "San Diego State vs North Carolina" }],
+    firstFour: [
+      { seed: 16, teams: "Howard vs UMBC" },
+    ],
     teams: [
-      "Indiana State Sycamores (#13)",
-      "Colgate Raiders (#14)",
-      "Robert Morris Colonials (#15)",
-      "Southern University Jaguars (#16)",
-      "⚔️ #11 First Four: San Diego State vs North Carolina (winner advances)",
+      "Hofstra Pride (#13)",
+      "Wright State Raiders (#14)",
+      "Tennessee State Tigers (#15)",
+      "⚔️ #16 First Four: Howard vs UMBC (winner advances)",
     ]},
 ];
 
@@ -103,57 +102,58 @@ const ALL_LOTS = [...INDIVIDUAL_TEAMS, ...GROUP_LOTS];
 // For First Four seeds, show both possible opponents
 const FIRST_ROUND_MATCHUPS = {
   // East
-  "East-1":  "vs. #16 SIUE/Texas Southern (First Four winner)",
-  "East-2":  "vs. #15 Wofford Terriers",
-  "East-3":  "vs. #14 Troy Trojans",
-  "East-4":  "vs. #13 High Point Panthers",
-  "East-5":  "vs. #12 McNeese Cowboys",
-  "East-6":  "vs. #11 NC State Wolfpack",
-  "East-7":  "vs. #10 New Mexico Lobos",
-  "East-8":  "vs. #9 Creighton Bluejays",
-  "East-9":  "vs. #8 Louisville Cardinals",
-  "East-10": "vs. #7 Saint Mary's Gaels",
-  "East-11": "vs. #6 BYU Cougars",
-  "East-12": "vs. #5 Mississippi State",
+  "East-1":  "vs. #16 Siena Saints",
+  "East-2":  "vs. #15 Furman Paladins",
+  "East-3":  "vs. #14 North Dakota State",
+  "East-4":  "vs. #13 Cal Baptist Lancers",
+  "East-5":  "vs. #12 Northern Iowa Panthers",
+  "East-6":  "vs. #11 South Florida Bulls",
+  "East-7":  "vs. #10 UCF Knights",
+  "East-8":  "vs. #9 TCU Horned Frogs",
+  "East-9":  "vs. #8 Ohio State Buckeyes",
+  "East-10": "vs. #7 UCLA Bruins",
+  "East-11": "vs. #6 Louisville Cardinals",
+  "East-12": "vs. #5 St. John's Red Storm",
   // West
-  "West-1":  "vs. #16 Bethune-Cookman/Howard (First Four winner)",
-  "West-2":  "vs. #15 Bryant Bulldogs",
-  "West-3":  "vs. #14 Lipscomb Bisons",
-  "West-4":  "vs. #13 Yale Bulldogs",
-  "West-5":  "vs. #12 UC San Diego Tritons",
-  "West-6":  "vs. #11 Drake Bulldogs",
-  "West-7":  "vs. #10 Arkansas Razorbacks",
-  "West-8":  "vs. #9 Oklahoma Sooners",
-  "West-9":  "vs. #8 Cincinnati Bearcats",
-  "West-10": "vs. #7 Marquette Golden Eagles",
-  "West-11": "vs. #6 Missouri Tigers",
-  "West-12": "vs. #5 Oregon Ducks",
+  "West-1":  "vs. #16 Long Island Sharks",
+  "West-2":  "vs. #15 Queens Royals",
+  "West-3":  "vs. #14 Kennesaw State Owls",
+  "West-4":  "vs. #13 Hawaii Warriors",
+  "West-5":  "vs. #12 High Point Panthers",
+  "West-6":  "vs. #11 NC State/Texas (First Four winner)",
+  "West-7":  "vs. #10 Missouri Tigers",
+  "West-8":  "vs. #9 Utah State Aggies",
+  "West-9":  "vs. #8 Villanova Wildcats",
+  "West-10": "vs. #7 Miami Hurricanes",
+  "West-11": "vs. #6 BYU Cougars",
+  "West-12": "vs. #5 Wisconsin Badgers",
   // South
-  "South-1":  "vs. #16 Norfolk State Spartans",
-  "South-2":  "vs. #15 Montana Grizzlies",
-  "South-3":  "vs. #14 Akron Zips",
-  "South-4":  "vs. #13 Grand Canyon Antelopes",
-  "South-5":  "vs. #12 Colorado State Rams",
-  "South-6":  "vs. #11 VCU/New Mexico Lobos (First Four winner)",
-  "South-7":  "vs. #10 Vanderbilt Commodores",
-  "South-8":  "vs. #9 Georgia Bulldogs",
-  "South-9":  "vs. #8 UConn Huskies",
-  "South-10": "vs. #7 UCLA Bruins",
-  "South-11": "vs. #6 Illinois Fighting Illini",
-  "South-12": "vs. #5 Memphis Tigers",
+  "South-1":  "vs. #16 Lehigh/Prairie View A&M (First Four winner)",
+  "South-2":  "vs. #15 Idaho Vandals",
+  "South-3":  "vs. #14 Penn Quakers",
+  "South-4":  "vs. #13 Troy Trojans",
+  "South-5":  "vs. #12 McNeese Cowboys",
+  "South-6":  "vs. #11 VCU Rams",
+  "South-7":  "vs. #10 Texas A&M Aggies",
+  "South-8":  "vs. #9 Iowa Hawkeyes",
+  "South-9":  "vs. #8 Clemson Tigers",
+  "South-10": "vs. #7 Saint Mary's Gaels",
+  "South-11": "vs. #6 North Carolina Tar Heels",
+  "South-12": "vs. #5 Vanderbilt Commodores",
   // Midwest
-  "Midwest-1":  "vs. #16 Southern University Jaguars",
-  "Midwest-2":  "vs. #15 Robert Morris Colonials",
-  "Midwest-3":  "vs. #14 Colgate Raiders",
-  "Midwest-4":  "vs. #13 Indiana State Sycamores",
-  "Midwest-5":  "vs. #12 Liberty Flames",
-  "Midwest-6":  "vs. #11 San Diego State/N. Carolina (First Four winner)",
-  "Midwest-7":  "vs. #10 New Mexico Lobos",
-  "Midwest-8":  "vs. #9 Boise State Broncos",
-  "Midwest-9":  "vs. #8 Northwestern Wildcats",
-  "Midwest-10": "vs. #7 Gonzaga Bulldogs",
-  "Midwest-11": "vs. #6 Dayton Flyers",
-  "Midwest-12": "vs. #5 Clemson Tigers",
+  "Midwest-1":  "vs. #16 Howard/UMBC (First Four winner)",
+  "Midwest-2":  "vs. #15 Tennessee State Tigers",
+  "Midwest-3":  "vs. #14 Wright State Raiders",
+  "Midwest-4":  "vs. #13 Hofstra Pride",
+  "Midwest-5":  "vs. #12 Akron Zips",
+  "Midwest-6":  "vs. #11 SMU/Miami OH (First Four winner)",
+  "Midwest-7":  "vs. #10 Santa Clara Broncos",
+  "Midwest-8":  "vs. #9 Saint Louis Billikens",
+  "Midwest-9":  "vs. #8 Georgia Bulldogs",
+  "Midwest-10": "vs. #7 Kentucky Wildcats",
+  "Midwest-11": "vs. #6 Tennessee Volunteers",
+  "Midwest-12": "vs. #5 Texas Tech Red Raiders",
+}
 };
 
 
@@ -808,7 +808,234 @@ const css = `
   ::-webkit-scrollbar-track { background: var(--surface); }
   ::-webkit-scrollbar-thumb { background: var(--dim-green); }
   ::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
+
+  /* ── SPIN WHEEL ── */
+  .wheel-wrap {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px; padding: 8px 0;
+  }
+  .wheel-outer {
+    position: relative; width: 340px; height: 340px;
+    filter: drop-shadow(0 0 24px rgba(255,183,0,0.4));
+  }
+  .wheel-pointer {
+    position: absolute; top: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 28px solid var(--neon-amber);
+    z-index: 10;
+    filter: drop-shadow(0 0 8px rgba(255,183,0,0.8));
+  }
+  .wheel-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--neon-amber);
+    box-shadow: 0 0 16px rgba(255,183,0,0.6);
+    z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .wheel-spin-btn {
+    background: var(--dim-amber); color: var(--neon-amber);
+    border: 2px solid var(--neon-amber);
+    font-family: var(--font-mono); font-size: 1.1rem;
+    letter-spacing: 3px; padding: 14px 40px; cursor: pointer;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255,183,0,0.8);
+    box-shadow: 0 0 20px rgba(255,183,0,0.2);
+    transition: box-shadow 0.15s, background 0.15s;
+  }
+  .wheel-spin-btn:hover:not(:disabled) { box-shadow: 0 0 36px rgba(255,183,0,0.5); background: rgba(255,183,0,0.15); }
+  .wheel-spin-btn:disabled { opacity: 0.4; cursor: default; }
+  .wheel-result {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+    letter-spacing: 3px; color: var(--neon-green);
+    text-shadow: 0 0 16px rgba(57,255,106,0.7);
+    text-transform: uppercase; text-align: center;
+    animation: reveal 0.4s ease-out;
+  }
+  .wheel-lots-left {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+  }
 `;
+
+// ── Spin Wheel ────────────────────────────────────────────────────────────
+function SpinWheel({ lots, onLanded }) {
+  const canvasRef = useRef(null);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [landed, setLanded]         = useState(null);
+  const angleRef  = useRef(0);
+  const rafRef    = useRef(null);
+
+  const COLORS = [
+    "#0a3d1f","#1a6b2a","#0d2d0a","#2a4020",
+    "#0a2010","#163820","#082808","#1e4c18",
+  ];
+
+  function drawWheel(angle) {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const r  = cx - 4;
+    const n  = lots.length;
+    if (n === 0) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Outer ring
+    ctx.beginPath();
+    ctx.arc(cx, cy, r + 2, 0, Math.PI * 2);
+    ctx.strokeStyle = "#ffb700";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    const sliceAngle = (Math.PI * 2) / n;
+
+    lots.forEach((lot, i) => {
+      const start = angle + i * sliceAngle;
+      const end   = start + sliceAngle;
+
+      // Slice fill
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, start, end);
+      ctx.closePath();
+      ctx.fillStyle = COLORS[i % COLORS.length];
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,183,0,0.3)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Text
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(start + sliceAngle / 2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#39ff6a";
+      const maxW = r - 28;
+      const fontSize = n > 30 ? 7 : n > 20 ? 8 : n > 12 ? 9 : 10;
+      ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+      // Truncate if needed
+      let label = lot.isGroup ? `🎯 ${lot.region} 13-16` : `#${lot.seed} ${lot.name}`;
+      while (ctx.measureText(label).width > maxW && label.length > 4) {
+        label = label.slice(0, -4) + "…";
+      }
+      ctx.fillText(label, r - 12, 3);
+      ctx.restore();
+
+      // Divider line
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(start) * r, cy + Math.sin(start) * r);
+      ctx.strokeStyle = "rgba(255,183,0,0.4)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    // Center cap
+    ctx.beginPath();
+    ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+    ctx.fillStyle = "#0d0f0a";
+    ctx.fill();
+    ctx.strokeStyle = "#ffb700";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  useEffect(() => {
+    drawWheel(angleRef.current);
+  }, [lots]);
+
+  function spin() {
+    if (isSpinning || lots.length === 0) return;
+    setIsSpinning(true);
+    setLanded(null);
+
+    // Pick random winner index
+    const winnerIdx = Math.floor(Math.random() * lots.length);
+    const sliceAngle = (Math.PI * 2) / lots.length;
+
+    // We want the pointer (top = -PI/2) to point at winnerIdx slice center
+    // Pointer at top means angle offset such that winner slice center = -PI/2
+    const winnerAngle = -(winnerIdx * sliceAngle + sliceAngle / 2) - Math.PI / 2;
+    // Add multiple full spins for drama
+    const totalSpins = 6 + Math.random() * 4;
+    const targetAngle = winnerAngle + totalSpins * Math.PI * 2;
+
+    const duration = 4000 + Math.random() * 1000;
+    const startAngle = angleRef.current;
+    const startTime = performance.now();
+
+    function easeOut(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function animate(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const current = startAngle + (targetAngle - startAngle) * easeOut(t);
+      angleRef.current = current;
+      drawWheel(current);
+
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      } else {
+        setIsSpinning(false);
+        setLanded(lots[winnerIdx]);
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(animate);
+  }
+
+  // Cleanup
+  useEffect(() => () => rafRef.current && cancelAnimationFrame(rafRef.current), []);
+
+  if (lots.length === 0) return null;
+
+  return (
+    <div className="wheel-wrap">
+      <div className="wheel-outer">
+        <div className="wheel-pointer" />
+        <canvas ref={canvasRef} width={340} height={340} style={{borderRadius:"50%"}} />
+        <div className="wheel-center">🏆</div>
+      </div>
+      <div className="wheel-lots-left">{lots.length} lot{lots.length !== 1 ? "s" : ""} remaining</div>
+      {landed && !isSpinning && (
+        <div className="wheel-result">
+          ▶ {landed.isGroup ? `${landed.region} 13-16 Seeds` : landed.name}
+        </div>
+      )}
+      {!landed && !isSpinning && (
+        <button className="wheel-spin-btn" onClick={spin}>
+          🎰 SPIN THE WHEEL
+        </button>
+      )}
+      {isSpinning && (
+        <button className="wheel-spin-btn" disabled>
+          SPINNING...
+        </button>
+      )}
+      {landed && !isSpinning && (
+        <div className="btn-row">
+          <button className="spin-btn" onClick={() => onLanded(landed.id)}>
+            ✅ START BIDDING ON THIS LOT
+          </button>
+          <button className="spin-btn" style={{background:"rgba(255,59,59,0.15)",borderColor:"var(--neon-red)",color:"var(--neon-red)"}}
+            onClick={() => { setLanded(null); }}>
+            🔄 SPIN AGAIN
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ── App ────────────────────────────────────────────────────────────────────
 export default function CalcuttaApp() {
@@ -932,7 +1159,7 @@ export default function CalcuttaApp() {
     await saveState(s); setAppState(s);
   }
 
-  async function spinNextLot() {
+  async function spinNextLot(chosenId) {
     if (spinning) return;
     setSpinning(true);
     let s = await loadState();
@@ -940,7 +1167,8 @@ export default function CalcuttaApp() {
       s.phase = "done";
       await saveState(s); setAppState(s); setSpinning(false); return;
     }
-    const [nextId, ...rest] = s.auctionQueue;
+    const nextId = chosenId || s.auctionQueue[0];
+    const rest = s.auctionQueue.filter(id => id !== nextId);
     s.auctionQueue    = rest;
     s.currentLotId    = nextId;
     s.currentBid      = 0;
@@ -1000,7 +1228,7 @@ export default function CalcuttaApp() {
     <>
       <style>{css}</style>
       <div className="app">
-        <div className="header"><h1>CALCUTTA AUCTION</h1><span className="badge">March Madness 2025</span></div>
+        <div className="header"><h1>CALCUTTA AUCTION</h1><span className="badge">March Madness 2026</span></div>
         <div className="lobby">
           <h2>JOIN THE AUCTION</h2>
           <p style={{color:"var(--muted)",textAlign:"center",maxWidth:440}}>Enter your name to join as a bidder, or open the host view to run the auction.</p>
@@ -1254,23 +1482,21 @@ export default function CalcuttaApp() {
               <div className="stage">
                 {isHost ? (
                   <>
-                    <div className="lot-name" style={{fontSize:"2rem",color:"var(--muted)"}}>
-                      {appState.auctionQueue?.length > 0 ? "Ready to reveal next lot" : "All lots revealed!"}
-                    </div>
-                    <div className="btn-row">
-                      {appState.auctionQueue?.length > 0 ? (
-                        <button className="spin-btn" onClick={spinNextLot} disabled={spinning}>
-                          🎰 REVEAL NEXT LOT ({appState.auctionQueue.length} left)
-                        </button>
-                      ) : (
+                    {appState.auctionQueue?.length > 0 ? (
+                      <SpinWheel
+                        lots={appState.lots.filter(t => appState.auctionQueue.includes(t.id))}
+                        onLanded={(id) => spinNextLot(id)}
+                      />
+                    ) : (
+                      <div className="btn-row">
                         <button className="spin-btn" onClick={() => { const s={...appState,phase:"done"}; saveState(s); setAppState(s); }}>
                           🏁 Finish Auction
                         </button>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </>
                 ) : (
-                  <div className="no-team">⏳ Waiting for host to reveal the next lot...</div>
+                  <div className="no-team">⏳ Waiting for host to spin the wheel...</div>
                 )}
               </div>
             )}
